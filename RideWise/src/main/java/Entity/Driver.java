@@ -4,14 +4,16 @@ public class Driver {
     private int id;
     private String name;
     private String phoneNumber;
-    private String currentLocation;
+    private Location currentLocation;
     private boolean available;
+    private VehicleType vehicleType;
 
-    public Driver(int id, String name, String phoneNumber, String currentLocation) {
+    public Driver(int id, String name, String phoneNumber, Location currentLocation, VehicleType vehicleType) {
         this.id = id;
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.currentLocation = currentLocation;
+        this.vehicleType = vehicleType;
         this.available = true;
     }
 
@@ -35,11 +37,22 @@ public class Driver {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getCurrentLocation() {
+    public Location getCurrentLocation() {
         return currentLocation;
     }
 
-    public void updateCurrentLocation(String currentLocation) {
+    public VehicleType getVehicleType() {
+        return vehicleType;
+    }
+
+    public void setVehicleType(VehicleType vehicleType) {
+        this.vehicleType = vehicleType;
+    }
+
+    public void updateCurrentLocation(Location currentLocation) {
+        if(currentLocation == null){
+            throw new IllegalArgumentException("Current location cannot be null.");
+        }
         this.currentLocation = currentLocation;
     }
 
