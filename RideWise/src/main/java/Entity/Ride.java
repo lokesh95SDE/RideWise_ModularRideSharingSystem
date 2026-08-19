@@ -40,7 +40,11 @@ public class Ride {
     //Check if the driver is null before assigning, if not null then do not assign and keep the status as requested
     public void assignDriver(Driver driver) {
         if(driver == null){throw new IllegalArgumentException("Driver cannot be null.");}
-        if(status == RideStatus.REQUESTED) {throw new IllegalArgumentException("Cannot assign driver to a ride that is not in REQUESTED status.");}
+        if (status != RideStatus.REQUESTED) {
+            throw new IllegalStateException(
+                    "A driver can only be assigned to a requested ride."
+            );
+        }
         this.driver = driver;
         status = RideStatus.ASSIGNED;
     }

@@ -7,6 +7,7 @@ public class Driver {
     private Location currentLocation;
     private boolean available;
     private VehicleType vehicleType;
+    private int completedRideCount=0;
 
     public Driver(int id, String name, String phoneNumber, Location currentLocation, VehicleType vehicleType) {
         this.id = id;
@@ -67,9 +68,22 @@ public class Driver {
         available = false;
     }
 
-    public void releaseAfterRide(){
+    public int getCompletedRideCount() {
+        return completedRideCount;
+    }
+
+
+    public void completeRideAndRelease(){
         if(available){
-            throw new IllegalArgumentException("Driver is already available.");
+            throw new IllegalStateException("Driver is already available.");
+        }
+        completedRideCount++;
+        available=true;
+    }
+
+    public void releaseAfterCancellation(){
+        if(available){
+            throw new IllegalStateException("Driver is already available.");
         }
         available=true;
     }
