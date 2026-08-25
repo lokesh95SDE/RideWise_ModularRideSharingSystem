@@ -49,5 +49,35 @@ public class Ride {
         status = RideStatus.ASSIGNED;
     }
 
+    public void startRide() {
+        if (status != RideStatus.ASSIGNED) {
+            throw new IllegalStateException(
+                    "Only an assigned ride can be started."
+            );
+        }
+
+        status = RideStatus.IN_PROGRESS;
+    }
+
+    public void completeRide() {
+        if (status != RideStatus.IN_PROGRESS) {
+            throw new IllegalStateException(
+                    "Only an in-progress ride can be completed."
+            );
+        }
+
+        status = RideStatus.COMPLETED;
+    }
+
+    public void cancelRide() {
+        if (status != RideStatus.REQUESTED
+                && status != RideStatus.ASSIGNED) {
+            throw new IllegalStateException(
+                    "Only requested or assigned rides can be cancelled."
+            );
+        }
+
+        status = RideStatus.CANCELLED;
+    }
 
 }

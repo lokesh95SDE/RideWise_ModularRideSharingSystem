@@ -10,7 +10,7 @@ public class PeakHourFareStrategy implements FareStrategy{
 
     private static final BigDecimal peakMultiplyFactor = new BigDecimal(1.5);
 
-    public final FareStrategy baseFareStrategy;
+    private final FareStrategy baseFareStrategy;
 
     public PeakHourFareStrategy(FareStrategy baseFareStrategy) {
         this.baseFareStrategy = baseFareStrategy;

@@ -9,11 +9,18 @@ public class LeastActiveDriverStrategy implements RideMatchingStrategy{
     @Override
     public Driver findDriver(Rider rider, List<Driver> drivers) {
         Driver leastActiveDriver = null;
-        int minrRides = Integer.MAX_VALUE;
+        int minRides = Integer.MAX_VALUE;
         for(Driver d : drivers){
-            int actualRideCounts = d.getCompletedRideCount();
-            if(actualRideCounts<minrRides){
-                minrRides = actualRideCounts;
+            if (!d.isAvailable()) {
+                continue;
+            }
+            if (d.getCompletedRideCount() < minRides)
+            {
+                minRides = d.getCompletedRideCount();
+                leastActiveDriver=d;
+            }
+            if (d.getCompletedRideCount() == minRides  && d.getId() < leastActiveDriver.getId())
+            {
                 leastActiveDriver=d;
             }
         }
